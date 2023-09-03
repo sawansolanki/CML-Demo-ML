@@ -27,10 +27,6 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl \
-          -H "Accept: application/vnd.github+json" \ 
-          -H "Authorization: token REPO_TOKEN" \
-          https://api.github.com/repos/sawansolanki/CML-Demo-ML/actions/runs
           pip install -r requirements.txt
           python training-model.py
           cat metrics.txt >> report.md
