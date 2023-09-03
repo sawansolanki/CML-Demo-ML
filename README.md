@@ -1,3 +1,3 @@
 # CML-Demo-ML
 
-CMLdemo
+CML demo
