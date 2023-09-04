@@ -119,14 +119,9 @@ plt.savefig('confusion-metrics.png')
 
 # In[15]:
 
-precision, recall, thresholds = precision_recall_curve(y_test, y_pred, pos_label=1)
+#precision, recall, thresholds = precision_recall_curve(y_test, y_pred, pos_label=1)
 
-plt.plot(recall, precision)
-plt.xlabel('Recall')
-plt.ylabel('Precision')
-plt.title('Precision-Recall Curve')
 
-plt.savefig('pre-recall.png')
 
 accuracy = accuracy_score(y_test, y_pred)
 precision, recall, fscore, _ = precision_recall_fscore_support(y_test, y_pred, average='weighted')
