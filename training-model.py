@@ -137,13 +137,13 @@ precision, recall, fscore, _ = precision_recall_fscore_support(y_test, y_pred, a
 labels = ['Accuracy', 'Precision', 'Recall', 'F1 Score']
 scores = [accuracy, precision, recall, fscore]
 
-plt.bar(labels, scores)
-plt.ylabel('Score')
-plt.title('Model Performance')
-plt.ylim(0, 1)  # Set the y-axis limit between 0 and 1
+# plt.bar(labels, scores)
+# plt.ylabel('Score')
+# plt.title('Model Performance')
+# plt.ylim(0, 1)  # Set the y-axis limit between 0 and 1
 
-# Show the plot
-plt.show()
+# # Show the plot
+# plt.show()
 
 
 # In[113]:
@@ -152,14 +152,14 @@ plt.show()
 precision, recall, thresholds = precision_recall_curve(y_test, y_pred, pos_label=1)
 
 # Plot the Precision-Recall curve
-plt.plot(recall, precision)
-plt.xlabel('Recall')
-plt.ylabel('Precision')
-plt.title('Precision-Recall Curve')
+# plt.plot(recall, precision)
+# plt.xlabel('Recall')
+# plt.ylabel('Precision')
+# plt.title('Precision-Recall Curve')
 
-# Show the plot
-plt.savefig('Precision-Recall-Curve.png')
-plt.show()
+# # Show the plot
+# plt.savefig('Precision-Recall-Curve.png')
+# plt.show()
 
 
 # In[103]:
