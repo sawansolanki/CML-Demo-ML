@@ -31,5 +31,4 @@ jobs:
           python iris-ml-training.py
           cat metrics.txt >> report.md
           cml publish confusion-metrics.png --md >> report.md
-          cml publish pre-recall.png --md >> report.md
           cml send-comment report.md
