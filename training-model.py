@@ -151,15 +151,15 @@ scores = [accuracy, precision, recall, fscore]
 
 precision, recall, thresholds = precision_recall_curve(y_test, y_pred, pos_label=1)
 
-# Plot the Precision-Recall curve
-# plt.plot(recall, precision)
-# plt.xlabel('Recall')
-# plt.ylabel('Precision')
-# plt.title('Precision-Recall Curve')
+Plot the Precision-Recall curve
+plt.plot(recall, precision)
+plt.xlabel('Recall')
+plt.ylabel('Precision')
+plt.title('Precision-Recall Curve')
 
-# # Show the plot
-# plt.savefig('Precision-Recall-Curve.png')
-# plt.show()
+# Show the plot
+plt.savefig('pre-call-Curve.png')
+
 
 
 # In[103]:
