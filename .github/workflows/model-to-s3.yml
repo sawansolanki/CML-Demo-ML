@@ -35,4 +35,6 @@ jobs:
 
       - name: Create Folder and Upload File
         run: |
-          aws s3api put-object --bucket first-bucket-sa2 --key "$(date +'%Y%m%d-%H%M%S')/iris-model.pkl" --body iris-model.pkl
+          s3-folder=$(date +'%Y%m%d-%H%M%S')
+          aws s3api put-object --bucket first-bucket-sa2 --key "$s3-folder/iris-model.pkl" --body iris-model.pkl
+          aws s3api put-object --bucket first-bucket-sa2 --key "$s3-folder/metrics.txt" --body metrics.txt
