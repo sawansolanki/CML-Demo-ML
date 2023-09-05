@@ -6,6 +6,9 @@ on:
       - opened
     branches:
       - 'main'
+  push:
+    branches:
+      - 'feature/**'
   
 env:
   APPLICATION_NAME: mlapp
