@@ -1,14 +1,11 @@
 name: CML-Pipeline
 
 on:
-  workflow_dispatch:
-  push:
-    branches:    
-      - Feature
   pull_request:
-    branches:    
-      - main
-      - Feature
+    types:
+      - opened
+    branches:
+      - 'feature**'
   
 env:
   APPLICATION_NAME: mlapp
