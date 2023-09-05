@@ -6,7 +6,6 @@ on:
       - opened
     branches:
       - 'main'
-      - 'feature/**'
   
 env:
   APPLICATION_NAME: mlapp
