@@ -4,7 +4,6 @@
 # In[1]:
 
 
-# Import necessary libraries
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -25,7 +24,6 @@ import numpy as np
 # In[3]:
 
 
-# Load the Iris dataset from scikit-learn
 from sklearn.datasets import load_iris
 iris = load_iris()
 
@@ -33,11 +31,9 @@ iris = load_iris()
 # In[4]:
 
 
-# Create a DataFrame from the Iris dataset
 df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
 df['target'] = iris.target
 
-# Split the dataset into features (X) and target (y)
 X = df.drop('target', axis=1)
 y = df['target']
 
@@ -87,49 +83,46 @@ X.shape
 # In[12]:
 
 
-# Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.9, random_state=42)
 
-# Create a Random Forest Classifier model
 model = DecisionTreeClassifier()
 
 
-# In[13]:
+# In[24]:
 
 
-# Train the model
 model.fit(X_train, y_train)
 
-# Make predictions on the test set
 y_pred = model.predict(X_test)
 
-# Calculate the accuracy of the model
 accuracy = accuracy_score(y_test, y_pred)
 
-with open("metrics.txt", "w") as outfile:
-    outfile.write("Accuracy Score for Model: " + str(accuracy) + "\n")
+# with open("metrics.txt", "w") as outfile:
+#     outfile.write("Accuracy Score for Model: " + str(accuracy) + "\n")
 
 print("Accuracy:", accuracy)
 
 
-# In[14]:
+# In[23]:
 
 
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
 
 
-# Create the confusion matrix
 cm = confusion_matrix(y_test, y_pred)
 
-# Plot the confusion matrix using Seaborn
 sns.heatmap(cm, annot=True, cmap='Blues').set(title='Confusion metrix',xlabel='predicted values', ylabel='actual values')
 
+plt.savefig('confusion-metrics.png')
 
-# In[100]:
+
+# In[15]:
+
+#precision, recall, thresholds = precision_recall_curve(y_test, y_pred, pos_label=1)
 
 
-# Calculate accuracy, precision, recall, and F1 score
+
 accuracy = accuracy_score(y_test, y_pred)
 precision, recall, fscore, _ = precision_recall_fscore_support(y_test, y_pred, average='weighted')
 
@@ -145,39 +138,34 @@ scores = [accuracy, precision, recall, fscore]
 # # Show the plot
 # plt.show()
 
+result_dict = dict(zip(labels, scores))
+print(result_dict)
 
-# In[113]:
+with open("metrics.txt", "w") as outfile:
+    outfile.write("Evaluation metrices for model: " + str(result_dict) + "\n")
 
 
-precision, recall, thresholds = precision_recall_curve(y_test, y_pred, pos_label=1)
-
-Plot the Precision-Recall curve
-plt.plot(recall, precision)
-plt.xlabel('Recall')
-plt.ylabel('Precision')
-plt.title('Precision-Recall Curve')
-
-# Show the plot
-plt.savefig('pre-call-Curve.png')
+# In[ ]:
 
 
 
-# In[103]:
 
 
-# Save the model to a .pkl file
+# In[17]:
+
+
 with open('iris-model.pkl', 'wb') as file:
     pickle.dump(model, file)
 
 
-# In[32]:
+# In[18]:
 
 
 with open('iris-model.pkl', 'rb') as file:
     iris_model = pickle.load(file)
 
 
-# In[44]:
+# In[19]:
 
 
 test_data = pd.DataFrame(
@@ -190,16 +178,26 @@ test_data = pd.DataFrame(
 )
 
 
-# In[45]:
+# In[20]:
 
 
 prdct = iris_model.predict(test_data)
 
 
-# In[46]:
+# In[21]:
 
 
 prdct
 
 
 # In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+

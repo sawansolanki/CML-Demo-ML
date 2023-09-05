@@ -1,22 +1,27 @@
 name: CML-Pipeline
 
 on:
-  workflow_dispatch:
-  push:
-    branches:    
-      - Feature
   pull_request:
-    branches:    
-      - main
-      - Feature
+    types:
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      - 'main'
+  push:
+    branches:
+      - 'feature/**'
   
 env:
-  APPLICATION_NAME: cml-app
+  APPLICATION_NAME: mlapp
 
 jobs:
   training_job:
     runs-on: [ubuntu-latest]
     steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
       - uses: iterative/setup-cml@v1
@@ -25,7 +30,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           pip install -r requirements.txt
-          python train.py
+          python iris-ml-training.py
           cat metrics.txt >> report.md
-          cml publish Precision-Recall-Curve.png --md >> report.md
+          cml publish confusion-metrics.png --md >> report.md
           cml send-comment report.md

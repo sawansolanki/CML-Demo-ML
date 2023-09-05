@@ -1,0 +1,38 @@
+name: model-s3-Pipeline
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  training_job:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+          
+      - uses: actions/checkout@v2
+      
+      - uses: actions/setup-python@v2
+      
+      - uses: iterative/setup-cml@v1
+      
+      - name: Train model
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pip install -r requirements.txt
+          python iris-ml-training.py
+          
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'us-east-1'
+
+      - name: Create Folder and Upload File
+        run: |
+          aws s3api put-object --bucket first-bucket-sa2 --key "$(date +'%Y%m%d-%H%M%S')/iris-model.pkl" --body iris-model.pkl
