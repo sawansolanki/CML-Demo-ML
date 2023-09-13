@@ -36,5 +36,6 @@ jobs:
       - name: Create Folder and Upload File
         run: |
           folder=$(date +'%Y%m%d-%H%M%S')
+          mv metrics.txt metrics-$folder.txt
           aws s3api put-object --bucket iris-ml-model-reg --key "model-versions/$folder/iris-model.pkl" --body iris-model.pkl
-          aws s3api put-object --bucket iris-ml-model-reg --key "model-versions/$folder/metrics.txt" --body metrics.txt
+          aws s3api put-object --bucket iris-ml-model-reg --key "model-versions/$folder/metrics-*.txt" --body metrics.txt
