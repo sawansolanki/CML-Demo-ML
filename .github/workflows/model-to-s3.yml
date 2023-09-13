@@ -37,5 +37,7 @@ jobs:
         run: |
           folder=$(date +'%Y%m%d-%H%M%S')
           mv metrics.txt metrics-$folder.txt
+          file_name=$(find . -name "metrics-*.txt")
+          file_name="${file_name:2}"
           aws s3api put-object --bucket iris-ml-model-reg --key "model-versions/$folder/iris-model.pkl" --body iris-model.pkl
-          aws s3api put-object --bucket iris-ml-model-reg --key "model-versions/$folder/metrics-*.txt" --body metrics.txt
+          aws s3api put-object --bucket iris-ml-model-reg --key "model-versions/$folder/$file_name" --body $file_name
